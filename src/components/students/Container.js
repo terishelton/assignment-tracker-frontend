@@ -25,7 +25,7 @@ export default class Container extends React.Component {
 
     render() {
         const { students, loading } = this.state
-        const { currentUserId } = this.props
+        //const { currentUserId } = this.props
 
         if (loading) return <div>Loading...</div>
 

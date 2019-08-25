@@ -2,15 +2,11 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
-const AuthenticatedLinks = ({ currentUserId, history, logoutUser }) => {
+const AuthenticatedLinks = ({ currentUserId, currentUserName, history, logoutUser }) => {
 	const logout = () => {
 		logoutUser()
 		history.push('/login')
 	}
-
-	// if user.admin = false
-	// show these links...
-	// else show these other links...
 
 	return (
 		<ul className='nav justify-content-start'>
@@ -29,10 +25,10 @@ const AuthenticatedLinks = ({ currentUserId, history, logoutUser }) => {
 					Create an Assignment
 				</Link>
 			</li>
-			<li className='nav-item align-self-end'>
-				Welcome, firstName!
+			<li className='nav-item welcome-nolink'>
+				<span>Welcome, {currentUserName}!</span>
 			</li>
-			<li className='nav-item align-self-end'>
+			<li className='nav-item'>
 				<button
 				className='btn btn-link'
 				onClick={logout}>

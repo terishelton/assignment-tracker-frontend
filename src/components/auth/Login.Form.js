@@ -42,7 +42,7 @@ class Login extends React.Component {
 			<main className='container'>
  				<section className='row justify-content-md-center'>
  					<div className='col col-lg-5'>
- 						<h1>Login</h1>
+ 						<h2>Login</h2>
 						<form onSubmit={this.handleSubmit}>
 							<div className='form-group'>
 								<label htmlFor='email'>Email</label>

@@ -14,6 +14,8 @@ class App extends React.Component {
 		super()
 		this.state = {
 			currentUserId: null,
+			currentUserRole: null,
+			currentUserName: null,
 			loading: true
 		}
 
@@ -26,7 +28,12 @@ class App extends React.Component {
 		const token = window.localStorage.getItem('assignment-tracker')
 		if (token) {
 			const { user }  = await auth.profile()
-			this.setState({ currentUserId: user._id, loading: false })
+			this.setState({ 
+				currentUserId: user._id, 
+				currentUserName: user.firstName,
+				currentUserRole: user.admin,
+				loading: false 
+			})
 		}
 		this.setState({ loading: false })
 	}
@@ -34,13 +41,21 @@ class App extends React.Component {
 	async signupUser(user) {
 		await auth.signup(user)
 		const profile = await auth.profile()
-		this.setState({ currentUserId: profile.user._id })
+		this.setState({ 
+			currentUserId: profile.user._id,
+			currentUserRole: profile.user.admin,
+			currentUserName: profile.user.firstName
+		})
 	}
 
 	async loginUser(user) {
 		await auth.login(user)
 		const profile = await auth.profile()
-		this.setState({ currentUserId: profile.user._id })
+		this.setState({ 
+			currentUserId: profile.user._id, 
+			currentUserRole: profile.user.admin,
+			currentUserName: profile.user.firstName
+		})
 	}
 	
 	logoutUser() {
@@ -49,7 +64,7 @@ class App extends React.Component {
 	}
 
 	render () {
-		const { currentUserId, loading } = this.state
+		const { currentUserId, currentUserRole, currentUserName, loading } = this.state
 		if (loading) return <div>Loading...</div>
 
 		return (
@@ -57,6 +72,8 @@ class App extends React.Component {
 				<Header />
 				<Navigation 
 					currentUserId={currentUserId}
+					currentUserRole={currentUserRole}
+					currentUserName={currentUserName}
 					logoutUser={this.logoutUser}
 				/>
 				<Switch>
@@ -80,7 +97,11 @@ class App extends React.Component {
 
 					<Route path='/students' render={() => {
 						return currentUserId 
-						? <StudentsContainer currentUserId={currentUserId} /> 
+						? <StudentsContainer
+							currentUserId={currentUserId}
+							currentUserRole={currentUserRole}
+							currentUserName={currentUserName}
+							/> 
 						: <Redirect to='/login' />
 					}} />
 
