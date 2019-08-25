@@ -1,10 +1,14 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import { Route } from 'react-router-dom'
 
-import List from './List/List'
 import * as assignments from '../../api/students'
 
-export default class Container extends React.Component {
+import List from './List/List'
+//import EditForm from './Forms/Edit.Form'
+import NewForm from './Forms/New.Form'
+
+class Container extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,6 +16,10 @@ export default class Container extends React.Component {
             loading: true
         }
         this.refreshAssignments = this.refreshAssignments.bind(this)
+
+        this.createAssignment = this.createAssignment.bind(this)
+        //this.deleteAssignment = this.deleteAssignment.bind(this)
+        //this.editAssignment = this.editAssignment.bind(this)
     }
 
     async componentDidMount() {
@@ -24,6 +32,15 @@ export default class Container extends React.Component {
         this.setState({ assignments: response.assignment })
     }
 
+    async createAssignment(assignment) {
+        const { currentUserId, history } = this.props
+
+        await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
+        await this.refreshAssignments().then(() => this.setState({ loading: false }))
+
+        history.push(`/assignments`)
+    }
+
     render() {
         const { assignments, loading } = this.state
 
@@ -31,8 +48,15 @@ export default class Container extends React.Component {
 
         return(
             <main className='container'>
-                <Route path='/assignments' exact component={() => <List assignments={assignments} />} />
+                <Route path='/assignments' exact component={ () => 
+                    <List assignments={assignments} />} 
+                />
+                <Route path='/assignments/new' exact component={ () => 
+                    <NewForm onSubmit={this.createAssignment} />} 
+                />
             </main>
         )
     }
 }
+
+export default withRouter(Container)

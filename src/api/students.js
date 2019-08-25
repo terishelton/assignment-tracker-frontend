@@ -26,6 +26,21 @@ export const getCurrentStudentAssignments = async(user) => {
 	})
 
 	const json = await response.json()
-	//const assignments = json.response.assignment // return just the assignments
 	return json
+}
+
+export const createAssignment = async(user, assignment) => {
+	console.log(user)
+	const token = window.localStorage.getItem('assignment-tracker')
+	const response = await fetch(`${BASE_URL}/api/students/${user.user._id}/assignment`, {
+		body: JSON.stringify(user.assignment),
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		},
+		method: 'POST'
+	})
+
+	const json = await response.json()
+    return json
 }

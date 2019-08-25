@@ -74,3 +74,10 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 .assignmentGradePending {
 	color: gray;
 }
+
+.errorMessage {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #dc3545;
+	color: white;
+}
