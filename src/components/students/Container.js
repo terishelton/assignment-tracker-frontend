@@ -1,36 +1,38 @@
 import React from 'react'
-//import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+
+import List from './List/List'
+import * as students from '../../api/students'
 
 export default class Container extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: [],
+            students: [],
             loading: true
         }
-        this.refreshUsers = this.refreshUsers.bind(this)
+        this.refreshStudents = this.refreshStudents.bind(this)
     }
 
-    // async componentDidMount() {
-    //     this.refreshUsers().then(() => this.setState({ loading: false }))
-    // }
+    async componentDidMount() {
+        this.refreshStudents().then(() => this.setState({ loading: false }))
+    }
     
-    // async refreshUsers() {
-    //     const { response } = await users.getAllUsers()
-    //     this.setState({ users: response })
-    // }
+    async refreshStudents() {
+        const { response } = await students.getAllStudents()
+        this.setState({ students: response })
+    }
 
     render() {
-        //const { users, loading } = this.state
-        const { loading } = this.state
-        //const { currentUserId } = this.props
+        const { students, loading } = this.state
+        const { currentUserId } = this.props
 
         if (loading) return <div>Loading...</div>
 
         return(
-            <div>
-                This will be a list of students.
-            </div>
+            <main className='container'>
+                <Route path='/students' exact component={() => <List students={students} />} />
+            </main>
         )
     }
 }

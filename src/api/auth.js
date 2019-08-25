@@ -25,7 +25,6 @@ export const login = async (user) => {
     })
 
     const json = await response.json()
-    console.log(json)
     localStorage.setItem('assignment-tracker', json.token)
     return json
 }
@@ -40,7 +39,6 @@ export const profile = async (user) => {
         method: 'GET',
     })
     
-    console.log(response)
     const json = await response.json()
     return json
 }
