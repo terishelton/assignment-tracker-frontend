@@ -1,3 +1,9 @@
+/* colors
+* lilac #9CA2DE
+* mint green #B3E6DE
+* teal #2A6F7E
+* pink #EACDEE
+*/
 
 header.jumbotron-fluid {
 	background-color: #B3E6DE;
@@ -34,9 +40,37 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	padding: .5rem 1rem;
 }
 
-/* colors
-* lilac #9CA2DE
-* mint green #B3E6DE
-* teal #2A6F7E
-* pink #EACDEE
-*/
+.assignmentList {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.assignmentItem {
+	background: #B3E6DE; 
+	padding: 10px;
+	margin-bottom: 5px;
+	border: 1px solid #ccc;
+	display: grid;
+	grid-template-columns: 80% 1fr;
+}
+
+.assignmentItem:nth-child(odd) { 
+	background: #EACDEE; 
+}
+
+.assignmentTitle { font-weight: bold; }
+
+.edits { margin-top: 1rem; }
+
+.edits button {
+	margin-right: 20px;
+}
+
+.assignmentGradeContainer {
+	text-align: right;
+}
+
+.assignmentGradePending {
+	color: gray;
+}

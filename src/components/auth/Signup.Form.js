@@ -8,9 +8,7 @@ class Signup extends React.Component {
             firstName: '',
             lastName: '',
 			email: '',
-            password: '',
-            admin: false,
-            error: false
+            password: ''
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -81,6 +79,7 @@ class Signup extends React.Component {
                                 />
                             </div>
                             <button type='submit' className='btn btn-primary'>Submit</button>
+                            
                         </form>
                     </div>
                 </section>
