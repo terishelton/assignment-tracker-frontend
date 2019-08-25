@@ -4,6 +4,13 @@ header.jumbotron-fluid {
 	padding: 2rem;
 }
 
+.btn-primary, .btn-primary:hover { 
+	background-color: #2A6F7E; 
+	border-color: #2A6F7E;
+}
+.btn-primary { opacity: 0.9; }
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus { opacity: 1.0; }
+
 a, a:visited, .btn-link {
 	/*color: #61dafb;*/
 	color: #2A6F7E;

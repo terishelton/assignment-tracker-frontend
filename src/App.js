@@ -5,6 +5,7 @@ import Navigation from './components/shared/navigation/Navigation'
 import Login from './components/auth/Login.Form'
 import Signup from './components/auth/Signup.Form'
 import StudentsContainer from './components/students/Container'
+import AssignmentsContainer from './components/assignments/Container'
 import './App.css';
 
 import * as auth from './api/auth'
@@ -78,11 +79,11 @@ class App extends React.Component {
 				/>
 				<Switch>
 					<Route path='/login' exact component={() => {
-						return currentUserId ? (
-						<Redirect to="/students" />
-						)
-						: (
-						<Login onSubmit={this.loginUser} />
+						return !currentUserId 
+						? <Login onSubmit={this.loginUser} />
+						: ( currentUserId && currentUserRole === false
+							? <Redirect to="/assignments" />
+							: <Redirect to="/students" />
 						)
 					}} />
 
@@ -101,6 +102,15 @@ class App extends React.Component {
 							currentUserId={currentUserId}
 							currentUserRole={currentUserRole}
 							currentUserName={currentUserName}
+							/> 
+						: <Redirect to='/login' />
+					}} />
+
+					<Route path='/assignments' render={() => {
+						return currentUserId 
+						? <AssignmentsContainer
+							currentUserId={currentUserId}
+							currentUserRole={currentUserRole}
 							/> 
 						: <Redirect to='/login' />
 					}} />

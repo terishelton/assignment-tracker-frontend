@@ -1,17 +1,3 @@
-// import React from 'react'
-// import Form from './Form'
-
-// export default ({ onSubmit }) => (
-// 	<main className='container'>
-// 		<section className='row justify-content-md-center'>
-// 			<div className='col col-lg-5'>
-// 				<h1>Login</h1>
-// 				<Form onSubmit={onSubmit} />
-// 			</div>
-// 		</section>
-// 	</main>
-// )
-
 import React from 'react'
 import { withRouter } from 'react-router'
 
@@ -40,7 +26,7 @@ class Login extends React.Component {
 	render () {
 		return (
 			<main className='container'>
- 				<section className='row justify-content-md-center'>
+ 				<section className='row'>
  					<div className='col col-lg-5'>
  						<h2>Login</h2>
 						<form onSubmit={this.handleSubmit}>

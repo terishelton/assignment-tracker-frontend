@@ -1,17 +1,3 @@
-// import React from 'react'
-// import Form from './Form'
-
-// export default ({ onSubmit }) => (
-//     <main className='container'>
-//         <section className='row justify-content-md-center'>
-//             <div className='col col-lg-5'>
-//                 <h1>Signup</h1>
-//                 <Form onSubmit={onSubmit} />
-//             </div>
-//         </section>
-//     </main>
-// )
-
 import React from 'react'
 import { withRouter } from 'react-router'
 
@@ -21,9 +7,10 @@ class Signup extends React.Component {
 		this.state = {
             firstName: '',
             lastName: '',
-			username: '',
+			email: '',
             password: '',
-            admin: false
+            admin: false,
+            error: false
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -31,19 +18,21 @@ class Signup extends React.Component {
 	}
 
 	handleChange ({ target: { name, value } }) {
-		this.setState({ [name]: value })
+		this.setState({ 
+            [name]: value 
+        })
 	}
 
 	handleSubmit (e) {
 		e.preventDefault()
-		this.props.onSubmit(this.state)
-		this.props.history.push('/students')
+		this.props.onSubmit(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.admin)
+		this.props.history.push('/assignments')
 	}
 
 	render () {
 		return (
 			<main className='container'>
-                <section className='row justify-content-md-center'>
+                <section className='row'>
                     <div className='col col-lg-5'>
                         <h2>Signup</h2>
                         <form onSubmit={this.handleSubmit}>

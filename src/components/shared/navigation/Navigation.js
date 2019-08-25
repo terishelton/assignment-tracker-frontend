@@ -24,7 +24,6 @@ export default ({ currentUserId, currentUserName, currentUserRole, logoutUser })
                         logoutUser={logoutUser}
                     /> 
                 )
-                
         }
         </div>
     </section>
