@@ -31,6 +31,15 @@ export default ({ assignments }) => {
 		</li>
 	))
 
+	if (assignments.length === 0) {
+		return (
+			<>
+				<h2>My Assignments</h2>
+				<div>No assignments yet. Add an assignment by clicking "Create an Assignment" in the top bar.</div>
+			</>
+		)
+	}
+
 	return (
 		<>
 			<h2>My Assignments</h2>

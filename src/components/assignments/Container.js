@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import * as assignments from '../../api/students'
 
 import List from './List/List'
-//import EditForm from './Forms/Edit.Form'
+import EditForm from './Forms/Edit.Form'
 import NewForm from './Forms/New.Form'
 
 class Container extends React.Component {
@@ -19,7 +19,7 @@ class Container extends React.Component {
 
         this.createAssignment = this.createAssignment.bind(this)
         //this.deleteAssignment = this.deleteAssignment.bind(this)
-        //this.editAssignment = this.editAssignment.bind(this)
+        this.editAssignment = this.editAssignment.bind(this)
     }
 
     async componentDidMount() {
@@ -41,8 +41,18 @@ class Container extends React.Component {
         history.push(`/assignments`)
     }
 
+    async editAssignment(assignment) {
+        const { currentUserId, history } = this.props
+        
+        await assignments.editAssignment({ user: { _id: currentUserId}, assignment })
+        await this.refreshAssignments().then(() => this.setState({ loading: false }))
+
+        history.push(`/assignments`)
+    }
+
     render() {
         const { assignments, loading } = this.state
+        const { users } = this.props
 
         if (loading) return <div>Loading...</div>
 
@@ -54,6 +64,11 @@ class Container extends React.Component {
                 <Route path='/assignments/new' exact component={ () => 
                     <NewForm onSubmit={this.createAssignment} />} 
                 />
+                <Route path='/assignments/:assignmentID/edit' exact component={({ match }) => {
+                    const user = users.find(user => user._id === match.params.userId)
+                    const assignment = user.assignments.find(user => user._id === match.params.assignmentID)
+                    return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
+                }}/>
             </main>
         )
     }

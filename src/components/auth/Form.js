@@ -1,57 +1,59 @@
-import React from 'react'
-import { withRouter } from 'react-router'
+// DELETE ONCE SURE NO LONGER NEEDED!
 
-class Form extends React.Component {
-	constructor (props) {
-		super(props)
-		this.state = {
-			username: '',
-			password: ''
-		}
+// import React from 'react'
+// import { withRouter } from 'react-router'
 
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
-	}
+// class Form extends React.Component {
+// 	constructor (props) {
+// 		super(props)
+// 		this.state = {
+// 			email: '',
+// 			password: ''
+// 		}
 
-	handleChange ({ target: { name, value } }) {
-		this.setState({ [name]: value })
-	}
+// 		this.handleChange = this.handleChange.bind(this)
+// 		this.handleSubmit = this.handleSubmit.bind(this)
+// 	}
 
-	handleSubmit (e) {
-		e.preventDefault()
-		this.props.onSubmit(this.state)
-		this.props.history.push('/students')
-	}
+// 	handleChange ({ target: { name, value } }) {
+// 		this.setState({ [name]: value })
+// 	}
 
-	render () {
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<div className='form-group'>
-					<label htmlFor='username'>Username</label>
-					<input
-						className='form-control'
-						id='username'
-						onChange={this.handleChange}
-						name='username'
-						type='text'
-						value={this.state.username} 
-					/>
-				</div>
-				<div className='form-group'>
-					<label htmlFor='password'>Password</label>
-					<input
-						className='form-control'
-						id='password'
-						onChange={this.handleChange}
-						name='password'
-						type='password'
-						value={this.state.password} 
-					/>
-				</div>
-				<button type='submit' className='btn btn-primary'>Submit</button>
-			</form>
-		)
-	}
-}
+// 	handleSubmit (e) {
+// 		e.preventDefault()
+// 		this.props.onSubmit(this.state)
+// 		this.props.history.push('/students')
+// 	}
 
-export default withRouter(Form)
+// 	render () {
+// 		return (
+// 			<form onSubmit={this.handleSubmit}>
+// 				<div className='form-group'>
+// 					<label htmlFor='username'>Username</label>
+// 					<input
+// 						className='form-control'
+// 						id='username'
+// 						onChange={this.handleChange}
+// 						name='username'
+// 						type='text'
+// 						value={this.state.username} 
+// 					/>
+// 				</div>
+// 				<div className='form-group'>
+// 					<label htmlFor='password'>Password</label>
+// 					<input
+// 						className='form-control'
+// 						id='password'
+// 						onChange={this.handleChange}
+// 						name='password'
+// 						type='password'
+// 						value={this.state.password} 
+// 					/>
+// 				</div>
+// 				<button type='submit' className='btn btn-primary'>Submit</button>
+// 			</form>
+// 		)
+// 	}
+// }
+
+// export default withRouter(Form)

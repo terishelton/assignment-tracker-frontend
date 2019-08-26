@@ -8,7 +8,13 @@ class Signup extends React.Component {
             firstName: '',
             lastName: '',
 			email: '',
-            password: ''
+            password: '',
+            admin: false,
+            error: false,
+            firstNameError: '',
+            lastNameError: '',
+            emailError: '',
+            passwordError: ''
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -17,14 +23,36 @@ class Signup extends React.Component {
 
 	handleChange ({ target: { name, value } }) {
 		this.setState({ 
-            [name]: value 
+            [name]: value,
+            admin: false,
+            error: false,
+            firstNameError: '',
+            lastNameError: '',
+            emailError: '',
+            passwordError: ''
         })
 	}
 
+    validateEmail(email) {
+        const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+        return regex.test(email)
+    }
+
 	handleSubmit (e) {
-		e.preventDefault()
-		this.props.onSubmit(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.admin)
-		this.props.history.push('/assignments')
+        e.preventDefault()
+
+        if (this.state.firstName === '') {
+            this.setState({ error: true, firstNameError: 'Please enter your first name.' })
+        } else if (this.state.lastName === '') {
+            this.setState({ error: true, lastNameError: 'Please enter your last name.' })
+        } else if ((this.state.email === '') || (!this.validateEmail(this.state.email)) ) {
+            this.setState({ error: true, emailError: 'Please enter a valid email address. '})
+        } else if (this.state.password.length < 8 ) {
+            this.setState({ error: true, passwordError: 'Please enter a password of at least 8 characters.' })
+        } else {
+            this.props.onSubmit(this.state)
+            this.props.history.push('/assignments')
+        }
 	}
 
 	render () {
@@ -33,7 +61,7 @@ class Signup extends React.Component {
                 <section className='row'>
                     <div className='col col-lg-5'>
                         <h2>Signup</h2>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit} noValidate>
                             <div className='form-group'>
                                 <label htmlFor='firstName'>First Name</label>
                                 <input
@@ -42,7 +70,7 @@ class Signup extends React.Component {
                                     onChange={this.handleChange}
                                     name='firstName'
                                     type='text'
-                                    value={this.state.firstName} 
+                                    value={this.state.firstName}
                                 />
                             </div>
                             <div className='form-group'>
@@ -79,7 +107,26 @@ class Signup extends React.Component {
                                 />
                             </div>
                             <button type='submit' className='btn btn-primary'>Submit</button>
-                            
+                            { this.state.error && this.state.firstNameError &&
+                                <div className="errorMessage">
+                                    {this.state.firstNameError}
+                                </div>
+                            }
+                            { this.state.error && this.state.lastNameError &&
+                                <div className="errorMessage">
+                                    {this.state.lastNameError}
+                                </div>
+                            }
+                            { this.state.error && this.state.emailError &&
+                                <div className="errorMessage">
+                                    {this.state.emailError}
+                                </div>
+                            }
+                            { this.state.error && this.state.passwordError &&
+                                <div className="errorMessage">
+                                    {this.state.passwordError}
+                                </div>
+                            }
                         </form>
                     </div>
                 </section>
