@@ -25,13 +25,13 @@ export default class Container extends React.Component {
 
     render() {
         const { students, loading } = this.state
-        //const { currentUserId } = this.props
+        const { currentUserRole } = this.props
 
         if (loading) return <div>Loading...</div>
 
         return(
             <main className='container'>
-                <Route path='/students' exact component={() => <List students={students} />} />
+                <Route path='/students' exact component={() => <List students={students} currentUserRole={currentUserRole} />} />
             </main>
         )
     }

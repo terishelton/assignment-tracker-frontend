@@ -1,16 +1,16 @@
 import React from 'react'
 
-export default ({ students }) => {
+export default ({ students, currentUserRole }) => {
 	const list = students.map(student => (
 		<li key={student._id} className='d-flex justify-content-between'>
 			<span className='studentInfo'>
 				{student.firstName} {student.lastName} &ndash; {student.email}
 			</span>
-			<span className='studentGrades'>
-				student score goes here in Admin view
-			</span>
-			
-			
+			{ currentUserRole === true &&
+				<span className='studentGrades'>
+					{student.overallGrade} / {student.overallGradeOutOf}
+				</span>
+			}
 		</li>
 	))
 
