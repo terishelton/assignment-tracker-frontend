@@ -13,19 +13,11 @@ export default ({ assignments }) => {
 				<div className='assignmentLink'>
 					<a href={assignment.link}>Project Link</a>
 				</div>
-				<div className='edits'>
-					<button className='btn btn-secondary'>Edit</button><button className='btn btn-danger'>Delete</button>
-				</div>
 			</div>
 			<div className='assignmentGradeContainer'>
-				{assignment.userScore
-				? (
 					<div className='assignmentGrade'>
 						{assignment.userScore} / {assignment.totalPossible}
 					</div>
-				) : (
-					<div className='assignmentGradePending'>Grade TBD</div>
-				)}
             </div>
 			
 		</li>
@@ -34,16 +26,16 @@ export default ({ assignments }) => {
 	if (assignments.length === 0) {
 		return (
 			<>
-				<h2>My Assignments</h2>
-				<div>No assignments yet. Add an assignment by clicking "Create an Assignment" in the top bar.</div>
+				<h2>Graded Assignments</h2>
+				<div>No graded assignments yet. Maybe time to catch up?</div>
 			</>
 		)
 	}
 
 	return (
 		<>
-			<h2>My Assignments</h2>
-			<ul className='assignmentList'>
+			<h2>Graded Assignments</h2>
+			<ul className='assignmentList graded'>
 				{ list }
 			</ul>
 		</>

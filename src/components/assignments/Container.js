@@ -1,10 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 import * as assignments from '../../api/students'
 
 import List from './List/List'
+import ListUngraded from './List/List.Ungraded'
+import ListGraded from './List/List.Graded'
 import EditForm from './Forms/Edit.Form'
 import NewForm from './Forms/New.Form'
 
@@ -52,7 +54,7 @@ class Container extends React.Component {
 
     render() {
         const { assignments, loading } = this.state
-        const { users } = this.props
+        const { users, currentUserRole } = this.props
 
         if (loading) return <div>Loading...</div>
 
@@ -68,6 +70,16 @@ class Container extends React.Component {
                     const user = users.find(user => user._id === match.params.userId)
                     const assignment = user.assignments.find(user => user._id === match.params.assignmentID)
                     return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
+                }}/>
+                <Route path='/assignments/ungraded' exact component={ () => {
+                    return currentUserRole === false
+                    ? <Redirect to="/assignments" />
+                    : <ListUngraded assignments={assignments} />
+                }}/>
+                <Route path='/assignments/graded' exact component={ () => {
+                    return currentUserRole === false
+                    ? <Redirect to="/assignments" />
+                    : <ListGraded assignments={assignments} />
                 }}/>
             </main>
         )
