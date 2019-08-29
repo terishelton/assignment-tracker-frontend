@@ -9,7 +9,8 @@ export default class Form extends React.Component {
 			title, 
 			description, 
 			link, 
-			error: false, 
+			graded: false,
+			error: false,
 			titleError: '',
 			descError: '',
 			linkError: ''

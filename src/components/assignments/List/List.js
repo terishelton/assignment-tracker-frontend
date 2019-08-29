@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default ({ assignments }) => {
+	console.log(assignments)
 	const list = assignments.map(assignment => (
 		<li key={assignment._id} className='assignmentItem'>
 			<div className='assignmentInfoContainer'>
@@ -14,7 +16,7 @@ export default ({ assignments }) => {
 					<a href={assignment.link}>Project Link</a>
 				</div>
 				<div className='edits'>
-					<button className='btn btn-secondary'>Edit</button><button className='btn btn-danger'>Delete</button>
+					<Link to='/assignments/edit' className='btn btn-secondary'>Edit</Link><button className='btn btn-danger'>Delete</button>
 				</div>
 			</div>
 			<div className='assignmentGradeContainer'>

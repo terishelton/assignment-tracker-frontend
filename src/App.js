@@ -5,7 +5,9 @@ import Navigation from './components/shared/navigation/Navigation'
 import Login from './components/auth/Login.Form'
 import Signup from './components/auth/Signup.Form'
 import StudentsContainer from './components/students/Container'
-import AssignmentsContainer from './components/assignments/Container'
+import StudentAssignmentContainer from './components/assignments/StudentContainer'
+import GradedContainer from './components/assignments/GradedContainer'
+import UngradedContainer from './components/assignments/UngradedContainer'
 import './App.css';
 
 import * as auth from './api/auth'
@@ -82,7 +84,7 @@ class App extends React.Component {
 						return !currentUserId 
 						? <Login onSubmit={this.loginUser} />
 						: ( currentUserId && currentUserRole === false
-							? <Redirect to="/assignments" />
+							? <Redirect to="/my-assignments" />
 							: <Redirect to="/students" />
 						)
 					}} />
@@ -106,13 +108,31 @@ class App extends React.Component {
 						: <Redirect to='/login' />
 					}} />
 
-					<Route path='/assignments' render={() => {
+					<Route path='/my-assignments' render={() => {
 						return currentUserId 
-						? <AssignmentsContainer
+						? <StudentAssignmentContainer
 							currentUserId={currentUserId}
 							currentUserRole={currentUserRole}
 							/> 
 						: <Redirect to='/login' />
+					}} />
+
+					<Route path='/assignments/ungraded' render={() => {
+						return !currentUserId 
+						? <Login onSubmit={this.loginUser} />
+						: ( currentUserId && currentUserRole === false
+							? <Redirect to="/my-assignments" />
+							: <UngradedContainer currentUserRole={currentUserRole} />
+						)
+					}} />
+
+					<Route path='/assignments/graded' render={() => {
+						return !currentUserId 
+						? <Login onSubmit={this.loginUser} />
+						: ( currentUserId && currentUserRole === false
+							? <Redirect to="/my-assignments" />
+							: <GradedContainer currentUserRole={currentUserRole} />
+						)
 					}} />
 
 					<Redirect to='/login' />

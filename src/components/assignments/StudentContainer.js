@@ -1,16 +1,14 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import * as assignments from '../../api/students'
 
 import List from './List/List'
-import ListUngraded from './List/List.Ungraded'
-import ListGraded from './List/List.Graded'
 import EditForm from './Forms/Edit.Form'
 import NewForm from './Forms/New.Form'
 
-class Container extends React.Component {
+class StudentAssignmentContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,7 +38,7 @@ class Container extends React.Component {
         await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
         await this.refreshAssignments().then(() => this.setState({ loading: false }))
 
-        history.push(`/assignments`)
+        history.push(`/my-assignments`)
     }
 
     async editAssignment(assignment) {
@@ -49,41 +47,31 @@ class Container extends React.Component {
         await assignments.editAssignment({ user: { _id: currentUserId}, assignment })
         await this.refreshAssignments().then(() => this.setState({ loading: false }))
 
-        history.push(`/assignments`)
+        history.push(`/my-assignments`)
     }
 
     render() {
         const { assignments, loading } = this.state
-        const { users, currentUserRole } = this.props
+        //const { currentUserId } = this.props
 
         if (loading) return <div>Loading...</div>
 
         return(
             <main className='container'>
-                <Route path='/assignments' exact component={ () => 
+                <Route path='/my-assignments' exact component={ () => 
                     <List assignments={assignments} />} 
                 />
-                <Route path='/assignments/new' exact component={ () => 
+                <Route path='/my-assignments/new' exact component={ () => 
                     <NewForm onSubmit={this.createAssignment} />} 
                 />
-                <Route path='/assignments/:assignmentID/edit' exact component={({ match }) => {
-                    const user = users.find(user => user._id === match.params.userId)
+                <Route path='/my-assignments/:assignmentID/edit' exact component={({match}) => {
+                    const user = assignments.find(user => user._id === match.currentUserId)
                     const assignment = user.assignments.find(user => user._id === match.params.assignmentID)
                     return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
-                }}/>
-                <Route path='/assignments/ungraded' exact component={ () => {
-                    return currentUserRole === false
-                    ? <Redirect to="/assignments" />
-                    : <ListUngraded assignments={assignments} />
-                }}/>
-                <Route path='/assignments/graded' exact component={ () => {
-                    return currentUserRole === false
-                    ? <Redirect to="/assignments" />
-                    : <ListGraded assignments={assignments} />
                 }}/>
             </main>
         )
     }
 }
 
-export default withRouter(Container)
+export default withRouter(StudentAssignmentContainer)

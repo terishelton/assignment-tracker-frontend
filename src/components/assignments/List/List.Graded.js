@@ -5,7 +5,7 @@ export default ({ assignments }) => {
 		<li key={assignment._id} className='assignmentItem'>
 			<div className='assignmentInfoContainer'>
 				<div className='assignmentTitle'>
-					{assignment.title}
+				{assignment.title} by {assignment.student[0].firstName} {assignment.student[0].lastName}
 				</div>
 				<div className='assignmentDescription'>
 					{assignment.description}
