@@ -67,6 +67,8 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	margin-right: 10px;
 }
 
+.assignmentInfoContainer { padding-right: 20px; }
+
 .assignmentGradeContainer {
 	text-align: right;
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import GradesForm from '../Forms/Grades.Form'
 
 export default ({ assignments, updateGrade }) => {
-	const list = assignments.map(assignment => (
+	const list = assignments.reverse().map(assignment => (
 		<li key={assignment._id} className='assignmentItem'>
 			<div className='assignmentInfoContainer'>
 				<div className='assignmentTitle'>
