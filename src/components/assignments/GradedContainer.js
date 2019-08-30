@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 
 import * as assignments from '../../api/assignments'
 
@@ -12,6 +13,7 @@ class GradedContainer extends React.Component {
             loading: true
         }
         this.gradedAssignments = this.gradedAssignments.bind(this)
+        this.updateGrade = this.updateGrade.bind(this)
     }
 
     async componentDidMount() {
@@ -25,7 +27,9 @@ class GradedContainer extends React.Component {
 
     async updateGrade(assignment) {
         await assignments.gradeAssignments({ assignment })
-        await this.ungradedAssignments().then(() => this.setState({ loading: false }))
+        await this.gradedAssignments().then(() => this.setState({ loading: false }))
+
+        this.props.history.push('/assignments/graded')
     }
 
     render() {
@@ -44,4 +48,4 @@ class GradedContainer extends React.Component {
     }
 }
 
-export default GradedContainer
+export default withRouter(GradedContainer)

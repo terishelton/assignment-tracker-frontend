@@ -1,5 +1,5 @@
 /* colors
-* lilac #9CA2DE
+* lilac #9CA2DE rgba(156, 162, 222, 1.0)
 * mint green #B3E6DE
 * teal #2A6F7E
 * pink #EACDEE
@@ -18,14 +18,13 @@ header.jumbotron-fluid {
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus { opacity: 1.0; }
 
 a, a:visited, .btn-link {
-	/*color: #61dafb;*/
 	color: #2A6F7E;
 }
 
 ul { margin-left: 0; padding: 0; }
 
 ul.studentList li { 
-	background: #B3E6DE; 
+	background: rgba(156, 162, 222, 0.5);
 	padding: 10px;
 	margin-bottom: 5px;
 	border: 1px solid #ccc;
@@ -47,7 +46,7 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 }
 
 .assignmentItem {
-	background: #B3E6DE; 
+	background: rgba(156, 162, 222, 0.5);
 	padding: 10px;
 	margin-bottom: 5px;
 	border: 1px solid #ccc;
@@ -64,8 +63,8 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 
 .edits { margin-top: 1rem; }
 
-.edits button {
-	margin-right: 20px;
+.edits a {
+	margin-right: 10px;
 }
 
 .assignmentGradeContainer {
@@ -88,11 +87,11 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	grid-column-end: 4;
 }
 
-.assignmentGradeContainer .form-control {
+.form-control {
 	padding: .375rem 0 .375rem .375rem;
 }
 
-.assignmentGradeContainer .form-group {
+.form-group {
 	margin-bottom: 0;
 }
 
@@ -113,3 +112,24 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	color: white;
 }
 
+.studentFilter form, .studentFilter form .form-group {
+	display: flex;
+}
+
+.studentFilter form .form-group {
+	width: 25%;
+}
+.studentFilter form .form-group label {
+	display: inline-flex;
+    align-self: center;
+	margin-bottom: 0;
+	margin-right: 10px;
+}
+
+.studentFilter form {
+	margin-bottom: 20px;
+}
+
+.studentFilter form .form-group #aboveScore, .studentFilter form .form-group #belowScore {
+	width: 30%;
+}

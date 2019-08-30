@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
-const AuthenticatedLinks = ({ currentUserId, currentUserName, history, logoutUser }) => {
+const AuthenticatedLinks = ({ currentUserName, history, logoutUser }) => {
 	const logout = () => {
 		logoutUser()
 		history.push('/login')

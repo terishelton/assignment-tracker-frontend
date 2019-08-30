@@ -59,7 +59,7 @@ class StudentAssignmentContainer extends React.Component {
         
         history.push(`/my-assignments`)
         this.setState({ confirmation: true })
-      }
+    }
 
     render() {
         const { assignments, loading } = this.state

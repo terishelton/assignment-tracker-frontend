@@ -5,9 +5,9 @@ export default ({ assignments, deleteAssignment }) => {
 	const scoreColor = (assignment) => {
 		const percentage = assignment.userScore / assignment.totalPossible
 
-		if (percentage > 0.8) {
+		if (percentage >= 0.8) {
 			return 'text-success'
-		} else if ((percentage > 0.6) && (percentage < 0.79)) {
+		} else if ((percentage >= 0.6) && (percentage < 0.8)) {
 			return 'text-warning'
 		} else if (percentage < 0.6 ) {
 			return 'text-danger'

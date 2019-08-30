@@ -7,8 +7,7 @@ export default class Form extends React.Component {
 		const { userScore = '', totalPossible = '' } = assignment
 		this.state = { 
             userScore,
-            totalPossible,
-            graded: false
+			totalPossible
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -23,8 +22,6 @@ export default class Form extends React.Component {
 		e.preventDefault()
         const { assignment } = this.props
         
-        this.setState({ graded: true })
-
         if (assignment && assignment._id) {
            const body = Object.assign({}, this.state, { _id: assignment._id })
            this.props.onSubmit(body)
