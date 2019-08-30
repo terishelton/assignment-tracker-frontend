@@ -1,7 +1,7 @@
 import React from 'react'
 import GradesForm from '../Forms/Grades.Form'
 
-export default ({ assignments, onSubmit }) => {
+export default ({ assignments, createGrade }) => {
 	const list = assignments.map(assignment => (
 		<li key={assignment._id} className='assignmentItem'>
 			<div className='assignmentInfoContainer'>
@@ -16,7 +16,7 @@ export default ({ assignments, onSubmit }) => {
 				</div>
 			</div>
 			<div className='assignmentGradeContainer'>
-				<GradesForm onSubmit={onSubmit} />
+				<GradesForm onSubmit={createGrade} assignment={assignment} />
             </div>
 			
 		</li>

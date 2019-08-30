@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 
 import * as assignments from '../../api/assignments'
 
@@ -12,6 +13,7 @@ class UngradedContainer extends React.Component {
             loading: true
         }
         this.ungradedAssignments = this.ungradedAssignments.bind(this)
+        this.createGrade = this.createGrade.bind(this)
     }
 
     async componentDidMount() {
@@ -23,13 +25,12 @@ class UngradedContainer extends React.Component {
         this.setState({ assignments: response })
     }
 
-    // TODO: finish this + I need a route on the front end and the back end!
-    //async createGrade(assignment) {
-        //const { currentUserId, history } = this.props
+    async createGrade(assignment) {
+        await assignments.gradeAssignments({ assignment })
+        this.ungradedAssignments().then(() => this.setState({ loading: false }))
 
-        //await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
-        //await this.refreshAssignments().then(() => this.setState({ loading: false }))
-    //}
+        this.props.history.push('/assignments/ungraded')
+    }
 
     render() {
         const { assignments, loading } = this.state
@@ -40,11 +41,11 @@ class UngradedContainer extends React.Component {
             <main className='container'>
                 <ListUngraded 
                     assignments={assignments} 
-                    //createGrade={this.createGrade}
+                    createGrade={this.createGrade}
                 />
             </main>
         )
     }
 }
 
-export default UngradedContainer
+export default withRouter(UngradedContainer)

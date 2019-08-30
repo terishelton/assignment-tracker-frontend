@@ -3,14 +3,12 @@ import React from 'react'
 export default class Form extends React.Component {
 	constructor (props) {
 		super(props)
-		const { grade = {} } = this.props
-		// ?? const { userScore = '', totalPossible = '', graded = '' } = grade // finish updating this
+		const { assignment = {} } = this.props
+		const { userScore = '', totalPossible = '' } = assignment
 		this.state = { 
-            userScore: '',
-            totalPossible: '',
-            graded: '',
-            overallGrade: '',
-            overallGradePossible: ''
+            userScore,
+            totalPossible,
+            graded: false
 		}
 
 		this.handleChange = this.handleChange.bind(this)
@@ -23,23 +21,16 @@ export default class Form extends React.Component {
 
 	handleSubmit (e) {
 		e.preventDefault()
-        const { grade } = this.props
+        const { assignment } = this.props
         
         this.setState({ graded: true })
 
-        // onSubmit is undefined - because it needs to be here?
-        // if (assignment && assignment._id) {
-        //    const body = Object.assign({}, this.state, { _id: assignment._id })
-        //    this.props.onSubmit(body)
-        // } else {
-        //    this.props.onSubmit(this.state)
-        // }
-
-        // also need to:
-        // set graded to true
-        // get overallGrade and overallGradePossible from user
-        // add userScore and totalPossible to overallGrade and overallGradePossible
-        // calculate %on overallGrade/overallGradePossible to set the color
+        if (assignment && assignment._id) {
+           const body = Object.assign({}, this.state, { _id: assignment._id })
+           this.props.onSubmit(body)
+        } else {
+           this.props.onSubmit(this.state)
+        }
 	}
 
 	render () {
@@ -55,7 +46,7 @@ export default class Form extends React.Component {
 						type='number'
 						value={this.state.userScore} />
 				</div>
-                <div>out of</div>
+                <div className="outof">out of</div>
 				<div className='form-group'>
 					<label htmlFor='totalPossible'>Total Possible</label>
 					<input

@@ -23,6 +23,11 @@ class GradedContainer extends React.Component {
         this.setState({ assignments: response })
     }
 
+    async updateGrade(assignment) {
+        await assignments.gradeAssignments({ assignment })
+        await this.ungradedAssignments().then(() => this.setState({ loading: false }))
+    }
+
     render() {
         const { assignments, loading } = this.state
 
@@ -30,7 +35,10 @@ class GradedContainer extends React.Component {
 
         return(
             <main className='container'>
-                <ListGraded assignments={assignments} />
+                <ListGraded 
+                    assignments={assignments} 
+                    updateGrade={this.updateGrade}
+                />
             </main>
         )
     }

@@ -28,3 +28,18 @@ export const getUnGradedAssignments = async() => {
     const json = await response.json()
 	return json
 }
+
+export const gradeAssignments = async(assignment) => {
+	const token = window.localStorage.getItem('assignment-tracker')
+	const response = await fetch(`${BASE_URL}/api/assignments/grade/${assignment.assignment._id}`, {
+		body: JSON.stringify(assignment),
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		},
+		method: 'PATCH'
+	})
+
+    const json = await response.json()
+	return json
+}

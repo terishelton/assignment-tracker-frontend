@@ -72,6 +72,36 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	text-align: right;
 }
 
+.assignmentGradeContainer form {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-row-gap: 0.5rem;
+}
+
+.assignmentGradeContainer .outof {
+	align-self: center;
+	justify-self: center;
+}
+
+.assignmentGradeContainer button {
+	grid-column-start: 1;
+	grid-column-end: 4;
+}
+
+.assignmentGradeContainer .form-control {
+	padding: .375rem 0 .375rem .375rem;
+}
+
+.assignmentGradeContainer .form-group {
+	margin-bottom: 0;
+}
+
+.assignmentGradeContainer label {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+
 .assignmentGradePending {
 	color: gray;
 }
@@ -82,3 +112,4 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	background-color: #dc3545;
 	color: white;
 }
+
