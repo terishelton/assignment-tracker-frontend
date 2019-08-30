@@ -1,5 +1,5 @@
-//const { REACT_APP_API_DOMAIN } = process.env
-const BASE_URL = 'http://localhost:5000'
+const { REACT_APP_API_DOMAIN } = process.env
+const BASE_URL = REACT_APP_API_DOMAIN //'http://localhost:5000'
 
 export const signup = async (user) => {
     const response = await fetch(`${BASE_URL}/api/signup`, {

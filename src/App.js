@@ -8,6 +8,7 @@ import StudentsContainer from './components/students/Container'
 import StudentAssignmentContainer from './components/assignments/StudentContainer'
 import GradedContainer from './components/assignments/GradedContainer'
 import UngradedContainer from './components/assignments/UngradedContainer'
+import './bootstrap.min.css'
 import './App.css';
 
 import * as auth from './api/auth'
