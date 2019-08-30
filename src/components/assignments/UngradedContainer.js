@@ -23,6 +23,14 @@ class UngradedContainer extends React.Component {
         this.setState({ assignments: response })
     }
 
+    // TODO: finish this + I need a route on the front end and the back end!
+    //async createGrade(assignment) {
+        //const { currentUserId, history } = this.props
+
+        //await assignments.createAssignment({ user: { _id: currentUserId }, assignment })
+        //await this.refreshAssignments().then(() => this.setState({ loading: false }))
+    //}
+
     render() {
         const { assignments, loading } = this.state
 
@@ -30,7 +38,10 @@ class UngradedContainer extends React.Component {
 
         return(
             <main className='container'>
-                <ListUngraded assignments={assignments} />
+                <ListUngraded 
+                    assignments={assignments} 
+                    //createGrade={this.createGrade}
+                />
             </main>
         )
     }

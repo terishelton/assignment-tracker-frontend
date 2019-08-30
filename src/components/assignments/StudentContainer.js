@@ -13,23 +13,24 @@ class StudentAssignmentContainer extends React.Component {
         super(props)
         this.state = {
             assignments: [],
-            loading: true
+            loading: true,
+            confirmation: false
         }
         this.refreshAssignments = this.refreshAssignments.bind(this)
 
         this.createAssignment = this.createAssignment.bind(this)
-        //this.deleteAssignment = this.deleteAssignment.bind(this)
+        this.deleteAssignment = this.deleteAssignment.bind(this)
         this.editAssignment = this.editAssignment.bind(this)
     }
 
     async componentDidMount() {
-        this.refreshAssignments().then(() => this.setState({ loading: false }))
+        this.refreshAssignments().then(() => this.setState({ loading: false, confirmation: false }))
     }
     
     async refreshAssignments() {
         const { currentUserId } = this.props
         const { response } = await assignments.getCurrentStudentAssignments(currentUserId)
-        this.setState({ assignments: response.assignment })
+        this.setState({ assignments: response })
     }
 
     async createAssignment(assignment) {
@@ -50,23 +51,38 @@ class StudentAssignmentContainer extends React.Component {
         history.push(`/my-assignments`)
     }
 
+    async deleteAssignment (assignment) {
+        const { currentUserId, history } = this.props
+        
+        await assignments.deleteAssignment({ user: { _id: currentUserId }, assignment })
+        await this.refreshAssignments().then(() => this.setState({ loading: false }))
+        
+        history.push(`/my-assignments`)
+        this.setState({ confirmation: true })
+      }
+
     render() {
         const { assignments, loading } = this.state
-        //const { currentUserId } = this.props
 
         if (loading) return <div>Loading...</div>
 
         return(
             <main className='container'>
+                { this.state.confirmation &&
+                    <div className="deleteConfirmation">Assignment deleted.</div>
+                }
                 <Route path='/my-assignments' exact component={ () => 
-                    <List assignments={assignments} />} 
+                    <List 
+                        assignments={assignments}
+                        deleteAssignment={this.deleteAssignment}
+                    />} 
                 />
                 <Route path='/my-assignments/new' exact component={ () => 
                     <NewForm onSubmit={this.createAssignment} />} 
                 />
-                <Route path='/my-assignments/:assignmentID/edit' exact component={({match}) => {
-                    const user = assignments.find(user => user._id === match.currentUserId)
-                    const assignment = user.assignments.find(user => user._id === match.params.assignmentID)
+
+                <Route path='/my-assignments/:assignmentId/edit' exact component={({match}) => {
+                    const assignment = assignments.find(assignment => assignment._id === match.params.assignmentId)
                     return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
                 }}/>
             </main>

@@ -1,8 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default ({ assignments }) => {
-	console.log(assignments)
+export default ({ assignments, deleteAssignment }) => {
+	const scoreColor = (assignment) => {
+		const percentage = assignment.userScore / assignment.totalPossible
+
+		if (percentage > 0.8) {
+			return 'text-success'
+		} else if ((percentage > 0.6) && (percentage < 0.79)) {
+			return 'text-warning'
+		} else if (percentage < 0.6 ) {
+			return 'text-danger'
+		}
+	}
+
 	const list = assignments.map(assignment => (
 		<li key={assignment._id} className='assignmentItem'>
 			<div className='assignmentInfoContainer'>
@@ -16,13 +27,13 @@ export default ({ assignments }) => {
 					<a href={assignment.link}>Project Link</a>
 				</div>
 				<div className='edits'>
-					<Link to='/assignments/edit' className='btn btn-secondary'>Edit</Link><button className='btn btn-danger'>Delete</button>
+					<Link to={`/my-assignments/${assignment._id}/edit/`} className='btn btn-secondary'>Edit</Link><button className='btn btn-danger' onClick={() => deleteAssignment(assignment)}>Delete</button>
 				</div>
 			</div>
 			<div className='assignmentGradeContainer'>
 				{assignment.userScore
 				? (
-					<div className='assignmentGrade'>
+					<div className={`assignmentGrade ${scoreColor(assignment)}`}>
 						{assignment.userScore} / {assignment.totalPossible}
 					</div>
 				) : (

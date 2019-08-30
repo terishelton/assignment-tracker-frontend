@@ -60,6 +60,7 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 }
 
 .assignmentTitle { font-weight: bold; }
+.assignmentTitle span { font-weight: normal; }
 
 .edits { margin-top: 1rem; }
 
@@ -75,7 +76,7 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	color: gray;
 }
 
-.errorMessage {
+.errorMessage, .deleteConfirmation {
 	margin-top: 20px;
 	padding: 10px;
 	background-color: #dc3545;

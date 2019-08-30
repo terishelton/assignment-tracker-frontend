@@ -44,15 +44,29 @@ export const createAssignment = async(user) => {
     return json.response
 }
 
-export const editAssignment = async(user, assignment) => {
+export const editAssignment = async(user) => {
 	const token = window.localStorage.getItem('assignment-tracker')
-	const response = await fetch(`${BASE_URL}/api/students/${user.user._id}/assignment/${assignment._id}`, {
-		body: JSON.stringify(assignment),
+	const response = await fetch(`${BASE_URL}/api/students/${user.user._id}/assignment/${user.assignment._id}`, {
+		body: JSON.stringify(user.assignment),
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json'
 		},
 		method: 'PATCH'
+	})
+
+	const json = await response.json()
+    return json.response
+}
+
+export const deleteAssignment = async(user) => {
+	const token = window.localStorage.getItem('assignment-tracker')
+	const response = await fetch(`${BASE_URL}/api/students/${user.user._id}/assignment/${user.assignment._id}`, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		},
+		method: 'DELETE'
 	})
 
 	const json = await response.json()
