@@ -79,6 +79,10 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 	grid-row-gap: 0.5rem;
 }
 
+.assignmentGradeContainer .form-group {
+	margin-bottom: 0;
+}
+
 .assignmentGradeContainer .outof {
 	align-self: center;
 	justify-self: center;
@@ -91,10 +95,6 @@ section ul.nav .welcome-nolink span, section ul.nav button {
 
 .form-control {
 	padding: .375rem 0 .375rem .375rem;
-}
-
-.form-group {
-	margin-bottom: 0;
 }
 
 .assignmentGradeContainer label {
